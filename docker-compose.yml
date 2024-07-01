@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  backend:
+    container_name: app_backend
+    image: node:22-alpine3.19
+    ports:
+      - 3333:3333
+    working_dir: /app-backend
+    # Caso queira que o container esteja atualizado durante o desenvolvimento, sem que você precise ficar fazendo down e up dos containers, descomente as 3 linhas abaixo
+    volumes: 
+      - ./:/app-backend/
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - DB_USER=root
+      - DB_PASS=123456
+      - DB_HOST=db
+      - DB_PORT=3306
+    tty: true
+    stdin_open: true
+  db:
+    image: mysql:8.0.37
+    container_name: db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=be_mobile_api
+    restart: 'always'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
+      timeout: 10s
+      retries: 5
