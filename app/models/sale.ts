@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
 import Client from '#models/client'
 import Product from '#models/product'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 
 export default class Sale extends BaseModel {
   @column({ isPrimary: true })
@@ -12,29 +12,23 @@ export default class Sale extends BaseModel {
   declare clientId: number
 
   @column()
-  declare productId: number
-
-  @column()
-  declare quantity: number
-
-  @column()
-  declare unitPrice: number
-
-  @column()
   declare totalPrice: number
 
   @column.dateTime()
   declare saleDate: DateTime
-
-  @belongsTo(() => Client)
-  declare client: BelongsTo<typeof Client>
-
-  @belongsTo(() => Product)
-  declare product: BelongsTo<typeof Product>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Client)
+  declare client: BelongsTo<typeof Client>
+
+  @manyToMany(() => Product, {
+    pivotTable: 'product_sales',
+    pivotColumns: ['quantity', 'unit_price'],
+  })
+  declare products: ManyToMany<typeof Product>
 }

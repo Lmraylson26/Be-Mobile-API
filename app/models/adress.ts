@@ -25,12 +25,12 @@ export default class Adress extends BaseModel {
   @column()
   declare number: string
 
-  @belongsTo(() => Client)
-  declare client: BelongsTo<typeof Client>
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Client)
+  declare client: BelongsTo<typeof Client>
 }
