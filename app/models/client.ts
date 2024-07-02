@@ -16,6 +16,12 @@ export default class Client extends BaseModel {
   declare cpf: string
 
   @column()
+  declare address_id: string
+
+  @column()
+  declare phone_id: string
+
+  @column()
   declare userId: number
 
   @belongsTo(() => User)

@@ -1,9 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import hash from '@adonisjs/core/services/hash'
 import User from '#models/user'
 
 export default class UsersController {
-  async siginup({ request, response }: HttpContext) {
+  async siginup({ request, response, auth }: HttpContext) {
     const body = request.body()
     const user = await User.create(body)
 
@@ -14,13 +13,14 @@ export default class UsersController {
   }
 
   async login({ request, response, auth }: HttpContext) {
-    const { email, password } = request.only(['email', 'password'])
-    const user = await User.query().where('email', email).firstOrFail()
-    if (!(await hash.verify(user.password, password))) {
-      return response.unauthorized('Invalid credentials')
-    }
+    const { email, password } = request.all()
+    const user = await User.verifyCredentials(email, password)
 
-    const token = await auth.use('api').generate(user)
-    return response.json({ token })
+    const validate = await auth.use('jwt').generate(user)
+
+    response.status(200).json({
+      data: user,
+      validate,
+    })
   }
 }

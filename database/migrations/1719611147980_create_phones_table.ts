@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.integer('client_id').unsigned().references('id').inTable('clients').onDelete('CASCADE')
       table.string('number', 11).notNullable()
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
     })
   }
 

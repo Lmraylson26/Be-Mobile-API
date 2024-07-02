@@ -10,10 +10,10 @@ export default class extends BaseSchema {
       table.string('state').notNullable()
       table.string('city').notNullable()
       table.string('neighborhood').notNullable()
-      table.string('stret').notNullable()
+      table.string('street').notNullable()
       table.string('number').notNullable()
-      table.timestamp('created_at')
-      table.timestamp('updated_at')
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
     })
   }
 
