@@ -12,16 +12,16 @@ import { middleware } from './kernel.js'
 const UsersController = () => import('#controllers/users_controller')
 const ClientsController = () => import('../app/controllers/clients_controller.js')
 
-router.post('/signup', [UsersController, 'signup'])
-router.post('/login', [UsersController, 'login'])
-
-router.get('/clients', [ClientsController, 'index'])
+router.post('signup', [UsersController, 'signup'])
+router.post('login', [UsersController, 'login'])
 
 router
-  .get('/', async ({ auth }) => {
-    auth.getUserOrFail()
-    return {
-      hello: 'world',
-    }
+  .group(() => {
+    router
+      .group(() => {
+        router.get('/', [ClientsController, 'index'])
+        router.post('/', [ClientsController, 'store'])
+      })
+      .prefix('clients')
   })
   .use(middleware.auth())

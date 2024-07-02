@@ -3,8 +3,9 @@ import Client from '#models/client'
 
 export default class ClientsController {
   async index({ response }: HttpContext) {
-    const clients = await Client.all()
-    response.status(200).json({
+    const clients = await Client.query().orderBy('id')
+
+    return response.status(200).json({
       data: clients,
     })
   }
@@ -18,9 +19,12 @@ export default class ClientsController {
   }
 
   async store({ request, response }: HttpContext) {
-    const data = request.only(['name', 'cpf', 'address', 'phone'])
+    const data = request.only(['name', 'cpf', 'userId'])
     const client = await Client.create(data)
-    response.status(201).json(client)
+
+    return response.status(201).json({
+      client,
+    })
   }
 
   async update({ params, request, response }: HttpContext) {

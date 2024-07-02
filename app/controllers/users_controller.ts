@@ -6,7 +6,7 @@ export default class UsersController {
     const body = request.body()
     const user = await User.create(body)
 
-    response.status(201).json({
+    return response.status(201).json({
       message: 'User created successfully',
       data: user,
     })
@@ -18,7 +18,7 @@ export default class UsersController {
     const user = await User.verifyCredentials(email, password)
     const validate = await auth.use('jwt').generate(user)
 
-    response.status(200).json({
+    return response.status(200).json({
       validate,
     })
   }
