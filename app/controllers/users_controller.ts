@@ -16,10 +16,11 @@ export default class UsersController {
     const { email, password } = request.all()
 
     const user = await User.verifyCredentials(email, password)
-    const validate = await auth.use('jwt').generate(user)
+    const validate = (await auth.use('jwt')) as any
+    const token = await validate.generate(user)
 
     return response.status(200).json({
-      validate,
+      token,
     })
   }
 }

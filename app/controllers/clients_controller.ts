@@ -10,13 +10,13 @@ export default class ClientsController {
     })
   }
 
-  async show({ params, response }: HttpContext) {
-    const client = await Client.findOrFail(params.id)
-    await client.load('sales', (salesQuery) => {
-      salesQuery.orderBy('created_at', 'desc')
-    })
-    response.json(client)
-  }
+  // async show({ params, response }: HttpContext) {
+  //   const client = await Client.findOrFail(params.id)
+  //   await client.load('sales', (salesQuery) => {
+  //     salesQuery.orderBy('created_at', 'desc')
+  //   })
+  //   response.json(client)
+  // }
 
   async store({ request, response }: HttpContext) {
     const data = request.only(['name', 'cpf', 'userId'])
@@ -29,15 +29,23 @@ export default class ClientsController {
 
   async update({ params, request, response }: HttpContext) {
     const client = await Client.findOrFail(params.id)
-    const data = request.only(['name', 'cpf', 'address', 'phone'])
+    const data = request.only(['name', 'cpf', 'userId'])
+
     client.merge(data)
     await client.save()
-    response.json(client)
+
+    return response.status(200).json({
+      client,
+    })
   }
 
-  async destroy({ params, response }: HttpContext) {
+  async delete({ params, response }: HttpContext) {
     const client = await Client.findOrFail(params.id)
+
     await client.delete()
-    response.status(204)
+
+    return response.status(204).json({
+      message: 'Client deleted',
+    })
   }
 }
