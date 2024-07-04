@@ -10,6 +10,14 @@ export default class ProductsController {
     })
   }
 
+  async show({ params, response }: HttpContext) {
+    const product = await Product.findOrFail(params.id)
+
+    return response.status(200).json({
+      product,
+    })
+  }
+
   async store({ request, response }: HttpContext) {
     const data = request.only(['name', 'price', 'description'])
     const product = await Product.create(data)
