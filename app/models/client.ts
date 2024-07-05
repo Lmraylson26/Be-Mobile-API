@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import User from '#models/user'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Adress from '#models/adress'
+import Address from '#models/address'
 import Phone from '#models/phone'
 import Sale from '#models/sale'
 
@@ -30,8 +30,8 @@ export default class Client extends BaseModel {
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-  @hasMany(() => Adress)
-  declare adresses: HasMany<typeof Adress>
+  @hasMany(() => Address)
+  declare adresses: HasMany<typeof Address>
 
   @hasMany(() => Phone)
   declare phones: HasMany<typeof Phone>

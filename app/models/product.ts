@@ -27,7 +27,7 @@ export default class Product extends BaseModel {
 
   @manyToMany(() => Sale, {
     pivotTable: 'product_sales',
-    pivotColumns: ['quantity', 'unit_price'],
+    pivotColumns: ['quantity', 'unit_price', 'total_price'],
   })
   declare sales: ManyToMany<typeof Sale>
 }

@@ -1,29 +1,27 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import Client from '#models/client'
+import Product from '#models/product'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Sale from '#models/sale'
 
-export default class Adress extends BaseModel {
+export default class ProductSales extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare clientId: number
+  declare productId: number
 
   @column()
-  declare state: string
+  declare saleId: number
 
   @column()
-  declare city: string
+  declare quantity: number
 
   @column()
-  declare neighborhood: string
+  declare unitPrice: number
 
   @column()
-  declare street: string
-
-  @column()
-  declare number: string
+  declare totalPrice: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -31,6 +29,9 @@ export default class Adress extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Client)
-  declare client: BelongsTo<typeof Client>
+  @belongsTo(() => Product)
+  declare product: BelongsTo<typeof Product>
+
+  @belongsTo(() => Sale)
+  declare sale: BelongsTo<typeof Sale>
 }

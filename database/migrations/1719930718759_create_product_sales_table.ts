@@ -16,6 +16,7 @@ export default class extends BaseSchema {
       table.unique(['product_id', 'sale_id'])
       table.integer('quantity').unsigned().notNullable()
       table.decimal('unit_price').notNullable()
+      table.decimal('total_price').notNullable()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
