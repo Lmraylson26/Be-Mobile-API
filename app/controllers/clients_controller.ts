@@ -1,7 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Client from '#models/client'
-import Sale from '#models/sale'
-import { DateTime } from 'luxon'
 
 export default class ClientsController {
   async index({ response }: HttpContext) {
@@ -12,20 +10,13 @@ export default class ClientsController {
     })
   }
 
-  async show({ params, request, response }: HttpContext) {
-    const client = await Client.findOrFail(params.id)
-    // const { month, year } = request.qs()
-
-    // let salesQuery = Sale.query().where('clientId', params.id).orderBy('saleDate', 'desc')
-
-    // if (month && year) {
-    //   const startDate = DateTime.fromObject({ year, month, day: 1 })
-    //   const endDate = startDate.plus({ months: 1 })
-    //   salesQuery = salesQuery.whereBetween('saleDate', [startDate.toISO(), endDate.toISO()])
-    // }
-
-    // const sales = await salesQuery
-    // client.sales = sales
+  async show({ params, response }: HttpContext) {
+    const client = await Client.query()
+      .where('id', params.id)
+      .preload('sales', (saleQuery) => {
+        saleQuery.orderBy('sale_date', 'desc')
+      })
+      .firstOrFail()
 
     return response.status(200).json({
       client,
