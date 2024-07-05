@@ -3,7 +3,10 @@ import Product from '#models/product'
 
 export default class ProductsController {
   async index({ response }: HttpContext) {
-    const products = await Product.query().where('isDeleted', false).orderBy('name')
+    const products = await Product.query()
+      .where('isDeleted', false)
+      .select('name', 'price', 'description')
+      .orderBy('name')
 
     return response.status(200).json({
       data: products,
@@ -11,10 +14,17 @@ export default class ProductsController {
   }
 
   async show({ params, response }: HttpContext) {
-    const product = await Product.findOrFail(params.id)
+    const { name, price, description, isDeleted } = await Product.findOrFail(params.id)
+
+    const formattedProduct = {
+      name,
+      price,
+      description,
+      isDeleted,
+    }
 
     return response.status(200).json({
-      product,
+      data: formattedProduct,
     })
   }
 

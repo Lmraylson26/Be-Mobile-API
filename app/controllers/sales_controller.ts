@@ -14,7 +14,11 @@ export default class SalesController {
     await sale.save()
 
     for (const productData of products) {
-      const currentProduct = await Product.findOrFail(productData.productId)
+      const currentProduct = await Product.query()
+        .where('id', productData.productId)
+        .andWhere('isDeleted', false)
+        .firstOrFail()
+
       const totalPrice = currentProduct.price * productData.quantity
 
       await ProductSale.create({
