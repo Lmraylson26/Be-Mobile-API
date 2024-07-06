@@ -67,6 +67,15 @@ export default class ClientsController {
     })
   }
 
+  async store({ request, response }: HttpContext) {
+    const data = request.only(['name', 'cpf', 'userId'])
+    const client = await Client.create(data)
+
+    return response.status(201).json({
+      client,
+    })
+  }
+
   async update({ params, request, response }: HttpContext) {
     const client = await Client.findOrFail(params.id)
     const data = request.only(['name', 'cpf', 'userId'])
