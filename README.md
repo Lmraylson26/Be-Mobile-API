@@ -1,4 +1,4 @@
-# AdonisJS Backend Sales Application
+# AdonisJS Backend Sales Application - be. Mobile - Desafio
 
 Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece uma API RESTful para gerenciar usuários, clientes, produtos e vendas. A aplicação é dockerizada e utiliza MySQL como banco de dados. O projeto segue o padrão MVC e foi desenvolvido em:
 
@@ -8,14 +8,14 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 <details>
 <summary> Requisitos do Sistema</summary>
 
-## Requisitos Locais
+## Requisitos para rodar localmente
 - Node.js (versão 14 ou superior)
 - NPM (versão 6 ou superior)
 - MySQL (versão 8 ou superior)
 - VSCode (opcional, mas recomendado)
 - Extensão Thunder Client para VSCode (opcional, mas recomendado)
 
-## Requisitos rodar com Docker
+## Requisitos para rodar com Docker
 - Docker (versão 20 ou superior)
 - Docker Compose (versão 1.25 ou superior)
 - VSCode (opcional, mas recomendado)
@@ -33,7 +33,7 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 <details>
 <summary> informações</summary>
 
-## Arquivos Importantes
+## Arquivos importantes
 
 - `docker-compose.yml`
 Este arquivo define os serviços do Docker para o projeto, incluindo o serviço do back-end e o serviço do banco de dados MySQL.
@@ -47,12 +47,12 @@ Este script é usado para inicializar o contêiner Docker, garantindo que o banc
 </details>
 
 
-## Como Instalar e Rodar o Projeto
+## Como instalar e rodar o projeto
 
 <details>
 <summary> Instalação Local</summary>
 
-### Instalação Local
+### Instalação local
 
 1. Clone o repositório:
 
@@ -138,3 +138,177 @@ docker-compose up --build
 4. Acesse a aplicação em [http://localhost:3333](http://localhost:3333).
 </details>
 
+## Como testar as rotas com Thunder Client
+
+
+### Testando as Rotas
+
+- Com o Thunder Client instalado, clique no ícone da extensão na barra lateral do VScode.
+
+- Clique em "New Reques" para criar uma nova requisição.
+
+<details>
+<summary>Exemplo de Requisição para Signup</summary>
+- URL: `http://localhost:3333/signup`
+
+- Método: `POST`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "name": "Anakin Skywalker",
+  "email": "anakin_padawan@starwars",
+  "password": "p@ide2"
+}
+```
+</details>
+<details>
+<summary>Exemplo de Requisição para Login</summary>
+- URL: `http://localhost:3333/login`
+
+- Método: `POST`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "email": "anakin_padawan@starwars",
+  "password": "p@ide2"
+}
+```
+</details>
+<details>
+<summary>Rotas protegidas</summary>
+
+- Todas as rotas a partir daqui necessida de autenticação com `JWT`
+
+1. Ao acessar a rota de login com um email e password válidos você receberá como resposta da requisição uma chave: `Bearer`
+
+2. Copie essa chave e cole em Auth -> Auth -> Token Authorization
+
+<details>
+<summary>Clients</summary>
+
+### Listar todos os clientes
+
+- URL: `http://localhost:3333/clients`
+- Método: `GET`
+
+### Mostrar detalhes de um cliente
+
+- URL: `http://localhost:3333/clients/:id`
+- Método: `GET`
+
+
+### Criar um cliente
+
+- URL: `http://localhost:3333/clients`
+- Método: `POST`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "name": "Lucas Skywater",
+  "cpf": "00011122233",
+  "userId": 1
+}
+
+```
+
+### Atualizar um cliente
+
+- URL: `http://localhost:3333/clients/:id`
+- Método: `PUT`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "name": "Luke Skywalker",
+  "cpf": "00011122233",
+  "userId": 1
+}
+
+```
+
+### Excluir um cliente
+
+- URL: `http://localhost:3333/clients/:id`
+- Método: `DELETE`
+
+</details>
+<details>
+<summary>Products</summary>
+
+### Listar todos os produtos
+
+- URL: `http://localhost:3333/products`
+- Método: `GET`
+
+### Mostrar detalhes de um produto
+
+- URL: `http://localhost:3333/products/:id`
+- Método: `GET`
+
+
+### Criar um produto
+
+- URL: `http://localhost:3333/products`
+- Método: `POST`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "name": "Light saber blue",
+  "price": 10,
+  "description": "Peça rara passada de pai para filho"
+}
+
+```
+
+### Atualizar um produto
+
+- URL: `http://localhost:3333/products/:id`
+- Método: `PUT`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "name": "Light saber blue",
+  "price": 10.000,
+  "description": "Peça rara passada de pai para filho, pelo melhor amigo do pai"
+}
+
+```
+
+### Excluir um produto (soft delete)
+
+- URL: `http://localhost:3333/products/:id`
+- Método: `DELETE`
+
+</details>
+<details>
+<summary>Sales</summary>
+
+### Criar um venda
+
+- URL: `http://localhost:3333/sales`
+- Método: `POST`
+- Cabeçalhos: `Content-Type: application/json`
+- Corpo:
+```Json
+{
+  "clientId": 1,
+  "products": [
+    {
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "productId": 2,
+      "quantity": 1
+    }
+  ]
+}
+
+```
+</details>
+</details>
