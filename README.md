@@ -145,7 +145,7 @@ docker-compose up --build
 
 - Com o Thunder Client instalado, clique no ícone da extensão na barra lateral do VScode.
 
-- Clique em "New Request" para criar uma nova requisição.
+- Clique em `"New Request"` para criar uma nova requisição.
 
 <details>
 <summary>Exemplo de Requisição para Signup</summary>
@@ -310,3 +310,186 @@ docker-compose up --build
 
 ```
 </details>
+
+## Exemplo guiado
+
+### Passo a passo para testar a aplicação
+
+1. **Cria um User**
+   - URL: `http://localhost:3333/signup`
+   - Método: `POST`
+   - Cabeçalhos: `Content-Type: application/json`
+   - Corpo:
+     ```json
+     {
+       "name": "Anakin Skywalker",
+       "email": "anakin_padawan@starwars",
+       "password": "p@ide2"
+     }
+     ```
+
+2. **Faz login com User**
+   - URL: `http://localhost:3333/login`
+   - Método: `POST`
+   - Cabeçalhos: `Content-Type: application/json`
+   - Corpo:
+     ```json
+     {
+       "email": "anakin_padawan@starwars",
+       "password": "p@ide2"
+     }
+     ```
+   - Copie o token JWT retornado.
+
+3. **Cria 3 clientes**
+   - Cliente 1:
+     - URL: `http://localhost:3333/clients`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Leia Organa",
+         "cpf": "11122233344",
+         "userId": 1
+       }
+       ```
+   - Cliente 2:
+     - URL: `http://localhost:3333/clients`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Han Solo",
+         "cpf": "22233344455",
+         "userId": 1
+       }
+       ```
+   - Cliente 3:
+     - URL: `http://localhost:3333/clients`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Chewbacca",
+         "cpf": "33344455566",
+         "userId": 1
+       }
+       ```
+
+4. **Edita um cliente**
+   - URL: `http://localhost:3333/clients/2`
+   - Método: `PUT`
+   - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+   - Corpo:
+     ```json
+     {
+       "name": "Han Solo",
+       "cpf": "22233344455",
+       "userId": 1
+     }
+     ```
+
+5. **Apaga um cliente**
+   - URL: `http://localhost:3333/clients/3`
+   - Método: `DELETE`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+6. **Verifica um cliente específico**
+   - URL: `http://localhost:3333/clients/1`
+   - Método: `GET`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+7. **Cria 3 Produtos**
+   - Produto 1:
+     - URL: `http://localhost:3333/products`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Light saber blue",
+         "price": 10,
+         "description": "Peça rara passada de pai para filho"
+       }
+       ```
+   - Produto 2:
+     - URL: `http://localhost:3333/products`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Light saber red",
+         "price": 15,
+         "description": "Peça rara de um Sith"
+       }
+       ```
+   - Produto 3:
+     - URL: `http://localhost:3333/products`
+     - Método: `POST`
+     - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+     - Corpo:
+       ```json
+       {
+         "name": "Blaster",
+         "price": 20,
+         "description": "Arma preferida dos stormtroopers"
+       }
+       ```
+
+8. **Edita um produto**
+   - URL: `http://localhost:3333/products/2`
+   - Método: `PUT`
+   - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+   - Corpo:
+     ```json
+     {
+       "name": "Light saber red",
+       "price": 20,
+       "description": "Peça rara de um Lord Sith"
+     }
+     ```
+
+9. **Apaga um produto**
+   - URL: `http://localhost:3333/products/3`
+   - Método: `DELETE`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+10. **Verifica se estão todos os produtos**
+    - URL: `http://localhost:3333/products`
+    - Método: `GET`
+    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+11. **Verifica um produto específico**
+    - URL: `http://localhost:3333/products/1`
+    - Método: `GET`
+    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+12. **Cria uma venda**
+    - URL: `http://localhost:3333/sales`
+    - Método: `POST`
+    - Cabeçalhos: `Content-Type: application/json`, `Authorization: Bearer <SEU_TOKEN>`
+    - Corpo:
+      ```json
+      {
+        "clientId": 1,
+        "products": [
+          {
+            "productId": 1,
+            "quantity": 2
+          },
+          {
+            "productId": 2,
+            "quantity": 1
+          }
+        ]
+      }
+      ```
+
+13. **Verifica se estão todos os clientes**
+    - URL: `http://localhost:3333/clients`
+    - Método: `GET`
+    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
