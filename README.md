@@ -38,16 +38,19 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 - `docker-compose.yml`
 Este arquivo define os serviços do Docker para o projeto, incluindo o serviço do back-end e o serviço do banco de dados MySQL.
 
--`Dockerfile`
+- `Dockerfile`
 Este arquivo define como a imagem Docker do back-end será construída.
 
--`entrypoint.sh`
+- `entrypoint.sh`
 Este script é usado para inicializar o contêiner Docker, garantindo que o banco de dados MySQL esteja pronto antes de iniciar a aplicação AdonisJS.
 
 </details>
 
 
 ## Como Instalar e Rodar o Projeto
+
+<details>
+<summary> Instalação Local</summary>
 
 ### Instalação Local
 
@@ -95,6 +98,10 @@ npm run dev
 ```
 
 6. Acesse a aplicação em [http://localhost:3333](http://localhost:3333).
+</details>
+
+<details>
+<summary> Instalação com Docker</summary>
 
 ### Instalação com Docker
 
@@ -129,3 +136,5 @@ docker-compose up --build
 ```
 
 4. Acesse a aplicação em [http://localhost:3333](http://localhost:3333).
+</details>
+
