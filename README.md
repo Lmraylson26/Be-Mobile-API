@@ -363,7 +363,7 @@ docker-compose up --build
      - Corpo:
        ```json
        {
-         "name": "Han Solo",
+         "name": "Jar Jar Binks",
          "cpf": "22233344455",
          "userId": 1
        }
@@ -425,8 +425,8 @@ docker-compose up --build
        ```json
        {
          "name": "Light saber red",
-         "price": 15,
-         "description": "Peça rara de um Sith"
+         "price": 20,
+         "description": "Peça rara de um Lord Sith"
        }
        ```
    - Produto 3:
@@ -437,8 +437,8 @@ docker-compose up --build
        ```json
        {
          "name": "Blaster",
-         "price": 20,
-         "description": "Arma preferida dos stormtroopers"
+         "price": 2,
+         "description": "Arma ótima, porém difícil de acertar"
        }
        ```
 
@@ -450,8 +450,8 @@ docker-compose up --build
      ```json
      {
        "name": "Light saber red",
-       "price": 20,
-       "description": "Peça rara de um Lord Sith"
+       "price": 5,
+       "description": "Peça não tão rara, basta virar sith para ganhar"
      }
      ```
 
