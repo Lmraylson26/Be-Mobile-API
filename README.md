@@ -145,12 +145,12 @@ docker-compose up --build
 
 - Com o Thunder Client instalado, clique no ícone da extensão na barra lateral do VScode.
 
-- Clique em "New Reques" para criar uma nova requisição.
+- Clique em "New Request" para criar uma nova requisição.
 
 <details>
 <summary>Exemplo de Requisição para Signup</summary>
-- URL: `http://localhost:3333/signup`
 
+- URL: `http://localhost:3333/signup`
 - Método: `POST`
 - Cabeçalhos: `Content-Type: application/json`
 - Corpo:
@@ -164,8 +164,8 @@ docker-compose up --build
 </details>
 <details>
 <summary>Exemplo de Requisição para Login</summary>
-- URL: `http://localhost:3333/login`
 
+- URL: `http://localhost:3333/login`
 - Método: `POST`
 - Cabeçalhos: `Content-Type: application/json`
 - Corpo:
@@ -176,8 +176,7 @@ docker-compose up --build
 }
 ```
 </details>
-<details>
-<summary>Rotas protegidas</summary>
+
 
 - Todas as rotas a partir daqui necessida de autenticação com `JWT`
 
@@ -310,5 +309,4 @@ docker-compose up --build
 }
 
 ```
-</details>
 </details>
