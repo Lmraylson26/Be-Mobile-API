@@ -5,6 +5,8 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 - Adonis na versão 6.12.1
 - Lucid na versão 21.1.0
 
+Como forma de deixar os testes no repositório mais divertidos tomei a liberdade de usar exemplos de StarWars nas rotas para que o avaliador tivesse uma experiência tão boa ao testar quanto eu tive ao criar o projeto.
+
 <details>
 <summary> Requisitos do Sistema</summary>
 
@@ -312,8 +314,8 @@ docker-compose up --build
 </details>
 
 ## Exemplo guiado
-
-### Passo a passo para testar a aplicação
+<details>
+<summary>Passo a passo para testar a aplicação</summary>
 
 1. **Cria um User**
    - URL: `http://localhost:3333/signup`
@@ -493,3 +495,4 @@ docker-compose up --build
     - URL: `http://localhost:3333/clients`
     - Método: `GET`
     - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+</details>
