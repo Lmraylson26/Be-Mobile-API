@@ -6,7 +6,7 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 - Lucid na versão 21.1.0
 
 <details>
-<sumary> Requisitos do Sistema</sumary>
+<summary> Requisitos do Sistema</summary>
 
 ## Requisitos Locais
 - Node.js (versão 14 ou superior)
@@ -31,7 +31,7 @@ Este projeto é uma aplicação back-end desenvolvida com AdonisJS que fornece u
 
 
 <details>
-<sumary> informações</sumary>
+<summary> informações</summary>
 
 ## Arquivos Importantes
 
