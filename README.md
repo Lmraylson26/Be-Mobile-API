@@ -399,10 +399,11 @@ docker-compose up --build
    - Método: `DELETE`
    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
 
-6. **Verifica um cliente específico**
-   - URL: `http://localhost:3333/clients/1`
-   - Método: `GET`
-   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+6. **Verifica se estão todos os clientes**
+    - URL: `http://localhost:3333/clients`
+    - Método: `GET`
+    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`   
+
 
 7. **Cria 3 Produtos**
    - Produto 1:
@@ -491,8 +492,34 @@ docker-compose up --build
       }
       ```
 
-13. **Verifica se estão todos os clientes**
-    - URL: `http://localhost:3333/clients`
-    - Método: `GET`
-    - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+13. **Verifica um cliente específico**
+   - URL: `http://localhost:3333/clients/1`
+   - Método: `GET`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+14. **Verifica um cliente específico com filtro de mês e ano**
+   - URL: `http://localhost:3333/clients/1?month=7&year=2024`
+   - Método: `GET`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+15. **Verifica um cliente específico com filtro de mês**
+   - URL: `http://localhost:3333/clients/1?month=7`
+   - Método: `GET`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+16. **Verifica um cliente específico com filtro de ano**
+   - URL: `http://localhost:3333/clients/1?year=2024`
+   - Método: `GET`
+   - Cabeçalhos: `Authorization: Bearer <SEU_TOKEN>`
+
+### Conclusões Finais
+
+Espero que tenha se divertido ao testar as rotas da API, e espero que também teste as rotas além dos testes sugeridos para vê-la dar acesso não autorizado ao entrar sem Token ou para ver novos filtros diferentes dos sugeridos aqui, atualizar de formas diferentes das propostas, dentre outras coisas mais possíveis, estarei aberto a feedbacks de melhorias para a aplicação.
+
+### Expansões a serem realizadas nesse projeto
+
+- Realização de testes
+- Rota Admin para manusear os Users
+- Implementar cadastro de Phones e Adress
+
 </details>

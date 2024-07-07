@@ -20,10 +20,20 @@ export default class ClientsController {
     })
   }
 
-  async show({ params, response }: HttpContext) {
+  async show({ params, response, request }: HttpContext) {
+    const month = request.qs().month
+    const year = request.qs().year
+
     const client = await Client.query()
       .where('id', params.id)
       .preload('sales', (saleQuery) => {
+        if (month && year) {
+          saleQuery.whereRaw('MONTH(sale_date) = ? AND YEAR(sale_date) = ?', [month, year])
+        } else if (month) {
+          saleQuery.whereRaw('MONTH(sale_date) = ?', [month])
+        } else if (year) {
+          saleQuery.whereRaw('YEAR(sale_date) = ?', [year])
+        }
         saleQuery.orderBy('sale_date', 'desc').preload('products', (productQuery) => {
           productQuery.pivotColumns(['quantity', 'unit_price', 'total_price'])
         })
